@@ -3,7 +3,7 @@ import http from 'http';
 import App from './App.js';
  // Assuming your app module is in the same directory and named 'app.js'
 
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 // Create the server using the imported http module and your app
 const server = http.createServer(App);
