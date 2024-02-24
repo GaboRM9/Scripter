@@ -43,8 +43,13 @@ Contributions are welcome! Whether it's bug fixes, feature additions, or improve
 
 ## License
 
-Ensure you specify the license under which the project is released, allowing others to know how they can use, modify, and distribute the code.
+QuestionPro
+
+https://www.questionpro.com
 
 ## Contact
 
-Provide contact information or instructions for reaching out with questions, contributions, or support requests.
+gabriel.rodriguez@questionpro.com
+
+
+
