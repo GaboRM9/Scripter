@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// Import your existing dependencies
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { OpenAIEmbeddings, ChatOpenAI } from "@langchain/openai";
@@ -11,7 +10,7 @@ import { createRetrievalChain } from "langchain/chains/retrieval";
 import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
 import dotenv from 'dotenv';
 
-// Load environment variables
+// Load env config
 dotenv.config();
 
 // Initialize Express app
