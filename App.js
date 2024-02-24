@@ -24,19 +24,24 @@ app.use(bodyParser.json());
 app.post('/process-input', async (req, res) => {
     const inputText = req.body.input; // Access the input from the request body
 
-    // Your existing code to load documents and setup chains
+    // Loads documents on knowledge
     const loader = new DirectoryLoader("Knowlegde", { ".txt": (path) => new TextLoader(path) });
     const docs = await loader.load();
+    //Splits documents
     const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000, chunkOverlap: 200 });
     const splits = await textSplitter.splitDocuments(docs);
+    //Transforms splits to embeddings
     const vectorStore = await MemoryVectorStore.fromDocuments(splits, new OpenAIEmbeddings());
     const retriever = vectorStore.asRetriever();
+    //Create query for model
     const llm = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", temperature: 0 });   
     const prompt = ChatPromptTemplate.fromTemplate(`
         Answer the following question based only on the provided context:
         <context>{context}</context>
         You should answer the code question giving an example to the user, use concise responses dont invent stuff
         Question: {input}`);
+
+    //RAG    
     const documentChain = await createStuffDocumentsChain({ llm, prompt });
     const retrievalChain = await createRetrievalChain({ combineDocsChain: documentChain, retriever });
 
