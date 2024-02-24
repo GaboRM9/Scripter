@@ -41,7 +41,13 @@ app.post('/process-input', async (req, res) => {
     const prompt = ChatPromptTemplate.fromTemplate(`
         Answer the following question based only on the provided context:
         <context>{context}</context>
-        You should answer the code question giving an example to the user, use concise responses dont invent stuff
+        You should answer the code question giving an example to the user, use concise responses dont invent stuff.
+        The format of your response is:
+
+        Consice short explanation
+
+        <code>Code example</code>
+        
         Question: {input}`);
 
     //RAG    
