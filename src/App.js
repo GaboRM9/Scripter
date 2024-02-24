@@ -20,8 +20,27 @@ const port = process.env.PORT || 3000; // load port from .env or default to 3000
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
+
+/* API auth handler - Enable on production.
+// Middleware to check for API key in request headers
+const apiKeyMiddleware = (req, res, next) => {
+    const apiKey = req.headers['x-api-key']; // Assuming the API key is passed in the 'x-api-key' header
+
+    if (!apiKey) {
+        return res.status(401).json({ error: 'Please provide a valid API Key' });
+    }
+
+    if (apiKey !== process.env.API_KEY) { // Assuming your valid API key is stored in an environment variable
+        return res.status(403).json({ error: 'Invalid API key' });
+    }
+
+    next(); // Proceed to the next middleware/function if the API key is valid
+};
+
+*/
+
 // POST route to accept input
-app.post('/CreateScripter', async (req, res) => {
+app.post('/CreateScripter', apiKeyMiddleware, async (req, res) => {
     const inputText = req.body.input; // Access the input from the request body
 
     // Loads documents from knowledge folder
