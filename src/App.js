@@ -27,12 +27,15 @@ app.post('/process-input', async (req, res) => {
     // Loads documents on knowledge
     const loader = new DirectoryLoader("Knowlegde", { ".txt": (path) => new TextLoader(path) });
     const docs = await loader.load();
+
     //Splits documents
     const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000, chunkOverlap: 200 });
     const splits = await textSplitter.splitDocuments(docs);
+
     //Transforms splits to embeddings
     const vectorStore = await MemoryVectorStore.fromDocuments(splits, new OpenAIEmbeddings());
     const retriever = vectorStore.asRetriever();
+    
     //Create query for model
     const llm = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", temperature: 0 });   
     const prompt = ChatPromptTemplate.fromTemplate(`
