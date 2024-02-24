@@ -30,7 +30,7 @@ The application leverages Express.js for its web server framework, allowing it t
 ## Running the Application
 
 - **Start the Server:** Run `npm start` or `node <app-file-name>.js` to start the Express server.
-- **Accessing the Endpoint:** The application exposes a POST endpoint at `/process-input` where users can send their input text in JSON format (`{ "input": "Your question here" }`).
+- **Accessing the Endpoint:** The application exposes a POST endpoint at `/CreateScripter` where users can send their input text in JSON format (`{ "input": "Your question here" }`).
 - **Response:** The application processes the input, retrieves relevant information, and generates a response, which is then returned in JSON format (`{ "answer": "Generated response here" }`).
 
 ## Development and Extension
