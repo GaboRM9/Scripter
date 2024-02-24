@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.post('/CreateScripter', async (req, res) => {
     const inputText = req.body.input; // Access the input from the request body
 
-    // Loads documents on knowledge
+    // Loads documents from knowledge folder
     const loader = new DirectoryLoader("Knowlegde", { ".txt": (path) => new TextLoader(path) });
     const docs = await loader.load();
 
@@ -32,12 +32,12 @@ app.post('/CreateScripter', async (req, res) => {
     const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000, chunkOverlap: 200 });
     const splits = await textSplitter.splitDocuments(docs);
 
-    //Transforms splits to embeddings
+    //Transforms splits to embeddings and stores on vectorStore
     const vectorStore = await MemoryVectorStore.fromDocuments(splits, new OpenAIEmbeddings());
     const retriever = vectorStore.asRetriever();
 
     //Create query for model
-    const llm = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", temperature: 0 });   
+    const llm = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", temperature: 0 });   //You can replace the modelName with any model of OpenAI, for the best performance use fine-tuned models.
     const prompt = ChatPromptTemplate.fromTemplate(`
         Answer the following question based only on the provided context:
         <context>{context}</context>
