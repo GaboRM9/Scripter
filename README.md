@@ -47,7 +47,7 @@ QuestionPro
 
 https://www.questionpro.com
 
-## Contact
+## Contact and Contributors
 
 gabriel.rodriguez@questionpro.com
 
