@@ -1,6 +1,6 @@
 # Scripter Documentation
 
-Scripter is an LLM trained on JS logics from QuestionPro to support users when creating JS scripts for their surveys easier.
+Scripter is an LLM trained on JS logics from QuestionPro to support users when creating JS logic scripts for a survey.
 
 Scripter is built using Express.js and integrates various libraries from LangChain for processing natural language queries. It is designed to take input text from a user, process it through a retrieval and generation pipeline, and return a concise, contextually relevant answer.
 
