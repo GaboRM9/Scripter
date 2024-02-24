@@ -21,7 +21,7 @@ const port = process.env.PORT || 3000; // load port from .env or default to 3000
 app.use(bodyParser.json());
 
 // POST route to accept input
-app.post('/process-input', async (req, res) => {
+app.post('/CreateScripter', async (req, res) => {
     const inputText = req.body.input; // Access the input from the request body
 
     // Loads documents on knowledge
