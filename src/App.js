@@ -35,7 +35,7 @@ app.post('/process-input', async (req, res) => {
     //Transforms splits to embeddings
     const vectorStore = await MemoryVectorStore.fromDocuments(splits, new OpenAIEmbeddings());
     const retriever = vectorStore.asRetriever();
-    
+
     //Create query for model
     const llm = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", temperature: 0 });   
     const prompt = ChatPromptTemplate.fromTemplate(`
@@ -59,3 +59,6 @@ app.post('/process-input', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+// Export the app instance as a default export
+export default app;
