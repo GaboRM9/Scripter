@@ -40,7 +40,7 @@ const apiKeyMiddleware = (req, res, next) => {
 */
 
 // POST route to accept input
-app.post('/CreateScripter', apiKeyMiddleware, async (req, res) => {
+app.post('/CreateScripter', async (req, res) => {
     const inputText = req.body.input; // Access the input from the request body
 
     // Loads documents from knowledge folder
