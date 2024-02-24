@@ -1,0 +1,595 @@
+URL: https://www.questionpro.com/custom-scripting/index.html
+
+What is custom scripting?
+The custom scripting is used to change the flow of surveys or take actions based on custom or user-defined triggers. These triggers are based on the responses to the questions.
+QuestionPro offers the option to use code scripts in the JavaScript language. You can apply the custom JavaScripts on survey as well as on question level.
+Which QuestionPro license is required for using the custom scripting?
+The customer must have any one of the following license to use the custom scripting:
+Team Edition
+Research Edition
+Customer Experience
+For more details please visit the
+Pricing Page
+I don't know how to write a script, can anyone from QuestionPro team help me?
+Yes, QuestionPro provides a professional service to help customers with the custom scripting projects. Please
+Contact QuestionPro Representative
+to discuss your project requirements.
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/velocity.html
+
+Description:
+What is Custom Scripting?
+The custom scripting is used to change the flow of surveys or take actions based on customized, user-defined triggers. These triggers are based on the responses to the questions.
+QuestionPro offers a custom logic engine to apply code scripts in the Apache Velocity language on branching and looping. Velocity is a Java-based template engine that provides a template language to reference Java objects. You can configure this question to apply code scripts on branching and debugging with the below settings.
+Logic includes branching : If you want to jump to a question based on specific conditions, enable this option. The survey will skip rest of the questions and jump to the destination as configured in the script code.
+Note:
+This option will need at least one branchTo() function to be present in the script otherwise it will redirect the user to the thank you page.
+Logic includes looping : If you want the survey to loop through one or more questions, enable this option. It will display a set of questions repeatedly. The system saves multiple rows of data for each loop executed.
+Debugging: This option is used for debugging the execution of the script code. You can check the output after each command is executed.
+Auto-Submit: To auto-submit the page after script execution, enable this option. The survey will move to the next page without clicking on the 'Next' button.
+What is the use of the custom logic question?
+The custom logic engine question type can b used to fulfill a variety of custom requirements like
+Course evaluation survey: The survey creator can ask the same set of questions for different courses. For each course, the survey can loop through the questionnaire.
+Restaurant evaluation survey: Restaurant chains often conduct an online survey to collect customer feedback. If they have visited multiple food joints, the study would ask questions that compare the performance of the various outlets. You can use the custom logic question to set the custom variable with the restaurant name or location and ask questions specific to it.
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/velocity/update-custom-variable.html
+
+Description:
+This function will help you to update the custom variables for the respondents while they are answering the survey.
+Syntax
+$survey.updateCustomN("Value")
+Here the value for N ranges from 1 to 5 (Custom1 to Custom5).
+Example Script
+Consider a scenario where you want to ask respondents which Restaurant they like to go for dinner and subsequently you wish to ask them questions related to the Restaurant of their choice.
+arrow_right
+Script
+## store the response to custom 1 and redirect to Q2 ##
+            $survey.updateCustom1("${Q1_1}")
+            $survey.branchTo("Q2")
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/velocity/update-high-custom-variable.html
+
+Description:
+This function will help you to update the high custom variables for the respondents while they are answering the survey.
+Syntax
+$survey.updateHighCustomVariable("Custom Variable Index", "Value")
+Here the value for "Custom Variable Index" ranges from 6 to 255 (Custom6 to Custom255).
+Example Script
+Consider a scenario where you want to ask respondents which Restaurant they like to go for dinner and subsequently you wish to ask them questions related to the Restaurant of their choice.
+arrow_right
+Script
+## store the response to custom 6 and redirect to Q2 ##
+            $survey.updateHighCustomVariable(6,"${Q1_1}")
+            $survey.branchTo("Q2")
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/velocity/branch-to.html
+
+Description:
+This function will help you to modify the flow of the survey for the respondent by apply branching logic via velocity script.
+Syntax
+$survey.branchTo("Question Code")
+Example Script
+Consider a scenario where you want to alter the flow of the survey based on the answer options selected in Q1 of the survey. If respondent select answer option 1 in Q1 then redirect to Q3 and if answer option 2 is selected redirect the user to Q4 and so on.
+arrow_right
+Script
+# if (${Q1} == 1 )
+           $survey.branchTo("Q3")
+          # end
+          # if (${Q1} == 2)
+           $survey.branchTo("Q4")
+          # end
+          # if (${Q1} == 3)
+           $survey.branchTo("Q5")
+          # end
+          # if (${Q1} == 4)
+           $survey.branchTo("Q6")
+          # end
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/velocity/example-scripts.html
+
+Example 1
+Here we check which option is selected for Q1 and depending on that we update the value of variable Custom1 with the correct text. If option 5 that is the Other option is selected then the variable Custom1 will get updated with the user input text. To refer to the text entered for the Other option we use: "QuestionCode_OTHER". Hence in the example script, QuestionCode is Q1 to refer the user input in the other option for question Q1.
+We are also branching to the next question which is Q2 for each selection. If required we can branch to different questions based on the selection. You can use ${custom1} to display the value stored in the variable Custom1 on the survey. Once updated the Custom1 value can be used anywhere on the survey.
+arrow_right
+Script
+#if (${Q1} == 1)
+            $survey.updateCustom1("Baseball")
+            $survey.branchTo("Q2")
+        #end
+            
+        #if (${Q1} == 2)
+            $survey.updateCustom1("Rugby")
+            $survey.branchTo("Q2")
+        #end
+            
+        #if (${Q1} == 3)
+            $survey.updateCustom1("Soccer")
+            $survey.branchTo("Q2")
+        #end
+            
+        #if (${Q1} == 4)
+            $survey.updateCustom1("Basketball")
+            $survey.branchTo("Q2")
+        #end
+            
+        #if (${Q1} == 5)
+            $survey.updateCustom1("${Q1_OTHER}")
+            $survey.branchTo("Q2")
+        #end
+Example 2
+To redirect the user to a question based on their answer to the current question you can use the script below:
+arrow_right
+Script
+##single select questions
+        #if(${Q2} == 1)
+            $survey.branchTo("Q10")
+        #end
+            
+        #if(${Q2} == 2)
+            $survey.branchTo("Q11")
+        #end
+                
+        ##Multi select questions branching
+        #if (${Q1_1} == "1" )
+            $survey.branchTo("Q10")
+        #end
+                    
+        #if (${Q1_2} == "1" )
+            $survey.branchTo("Q11")
+        #end
+Here, Q2 is the current question and Q10, Q11 are the questions after Q2.
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript.html
+
+Description:
+Why QuestionPro uses JavaScript?
+QuestionPro uses JavaScript for custom scripting because JavaScript is,
+supported on all the browsers.
+used by the browsers to create dynamic & interactive user experience.
+syntactically easy and flexible
+What are the options to add JavaScript to Questionpro surveys?
+QuestionPro provides two options to add JavaScript to your survey:
+JavaScript Logic:
+This option is used to add custom JavaScript on question level to acheive the desired survey flow. The JavaScript logic is further sub-divided into two sub-options:
+Pre JavaScript logic: This option is used to execute the JavaScript before the question is displayed to the respondents.
+Post JavaScript logic: This option is used to execute the JavaScript after the next button is clicked.
+Custom JS:
+This option is used to add custom JavaScript on survey level.
+FAQs
+What do I need to know to start using JavaScript?
+HTML forms the basis of any JavaScript and hence good to average knowledge about HTML basics is essential.In addition to that, understanding of basic JavaScript - the syntax, the basic statements, the conditional statements and the data types, is required.
+When should I consider using JavaScript validation on the question?
+There are multiple scenarios where JavaScript validation could be extremely handy and useful to solve your complex validation problems.
+For instance :
+You want to validate complex questions like flex matrix, conjoint, heatmap etc, where system validations would be limited.
+Where you would want to validate the question based on response to prior questions in the survey.
+Do client side validation so the request is not submitted to the server.
+Very specific/ custom validation on any question type. For instance you want only people who select 1 option from first 5 choices and 1 option from second 5 choices to multiple choice question to proceed.
+What are the possible validations I can achieve with this feature
+If you are a average to good JavaScript programmer you can solve any validation problem with this feature. A novice to JS could learn the basics and should be able to use the feature to solve straight forward validation problems in the survey.
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/hide-question.html
+
+Description:
+This function will help you to hide a specific question in a survey when the respondents are answering the survey.
+Syntax
+$survey.hideQuestion("Question Code");
+Example Script
+Based on the answer options selected in the source(Q1) question that particular option follow up question can be hidden.
+arrow_right
+Script
+/* get which option is selected in Q1 */
+        var a = $survey.getSelectedOptionIndex("Q1");
+        /* based on option selected in Q1 show questions  */
+        if (a == 1) {
+            $survey.hideQuestion("Q2");
+        } else if (a == 2) {
+            $survey.hideQuestion("Q3");
+        } else if (a == 3) {
+            $survey.hideQuestion("Q4");
+        } else if (a == 4) {
+            $survey.hideQuestion("Q5");
+        }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/show-question.html
+
+Description:
+This function will help you to show a specific question in a survey when the respondents are answering the survey.
+Syntax
+$survey.showQuestion("Question Code");
+Example Script
+Based on the answer options selected in the source(Q1) question the particular follow up question can be displayed or kept hidden.
+arrow_right
+Script
+/* hide questions on load of a page */
+        $survey.hideQuestion("Q2");
+        $survey.hideQuestion("Q3");
+        $survey.hideQuestion("Q4");
+        $survey.hideQuestion("Q5");
+              
+        /* get which option is selected in Q1 */
+        var a = $survey.getSelectedOptionIndex("Q1");
+                      
+        /* based on option selected in Q1 show questions  */
+        if (a == 1) {
+                        $survey.showQuestion("Q2");
+                     } else if (a == 2) {
+                        $survey.showQuestion("Q3");
+                     } else if (a == 3) {
+                        $survey.showQuestion("Q4");
+                     } else if (a == 4) {
+                        $survey.showQuestion("Q5");
+                     }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/hide-option.html
+
+Description:
+This function will help you to hide a specific answer option in a survey when the respondents are answering the survey.
+Syntax
+$survey.hideOption("Question Code","Option Index");
+Example Script
+Based on the answer options selected in the source question(Q1) we can display the same answer options under the followup question(Q2).
+arrow_right
+Script
+/* get options selected in Q1 */
+        var arr = $survey.getSelectedOptions("Q1");
+        console.log(arr);
+        /* check if Soccer is selected in Q1, if selected hide 1st option of Q2  */
+        if (jQuery.inArray("Soccer", arr) == -1) {
+                $survey.hideOption("Q2", 1);
+            }
+        if (jQuery.inArray("Cricket", arr) == -1) {
+                $survey.hideOption("Q2", 2);
+            }
+        if (jQuery.inArray("Basketball", arr) == -1) {
+                $survey.hideOption("Q2", 3);
+            }
+        if (jQuery.inArray("Hockey", arr) == -1) {
+                $survey.hideOption("Q2", 4);
+            }
+        if (jQuery.inArray("Baseball", arr) == -1) {
+                $survey.hideOption("Q2", 5);
+            }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/show-option.html
+
+Description:
+This function will help you to show/display a specific answer option in a survey when the respondents are answering the survey.
+Syntax
+$survey.showOption("Question Code","Option Index");
+Example Script
+Based on the answer options selected in the source question(Q1) we can display the same answer options under the followup question(Q2).
+arrow_right
+Script
+/* get options selected in Q1 */
+        var arr = $survey.getSelectedOptions("Q1");
+        console.log(arr);
+        /* check if Soccer is selected in Q1, if selected hide 1st option of Q2  */
+        if (jQuery.inArray("Soccer", arr) == -1) {
+                $survey.hideOption("Q2", 1);
+            }
+        if (jQuery.inArray("Cricket", arr) == -1) {
+                $survey.hideOption("Q2", 2);
+            }
+        if (jQuery.inArray("Basketball", arr) == -1) {
+                $survey.hideOption("Q2", 3);
+            }
+        if (jQuery.inArray("Hockey", arr) == -1) {
+                $survey.hideOption("Q2", 4);
+            }
+        if (jQuery.inArray("Baseball", arr) == -1) {
+                $survey.hideOption("Q2", 5);
+            }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/set-option-selected.html
+
+Description:
+This function will help you to auto-select an answer option in a survey based on the previous selections made by the respondents.
+Syntax
+Single Select
+$survey.setOptionSelected("Question Code","Option Index");
+Multi Select
+$survey.setOptionSelected("Question Code","Option Index Array");
+Example Script
+We can capture the options that are selected in the source questions(Q1) and by default select the same answer options under the follow up question.
+arrow_right
+Script
+var arr = $survey.getSelectedOption("Q1");
+        var items = ["Soccer","Cricket","Basketball","Hockey","Baseball","Tennis","Football","Badminton"];
+        //console.log(items);
+        for (var i = 0; i < items.length; i++) {
+        	if(items[i] == arr) {
+        		//console.log(items[i]);
+            	$survey.setOptionSelected("Q2", i+1);
+        	}
+        }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/get-selected-option.html
+
+Description:
+This function will help you to get the answer option selected by the respondents and use it within your script.
+Syntax
+$survey.getSelectedOption("Question Code")
+Example Script
+We can capture the options that are selected in the source questions(Q1) and by default select the same answer options under the follow up question.
+arrow_right
+Script
+var arr = $survey.getSelectedOption("Q1");
+        var items = ["Soccer","Cricket","Basketball","Hockey","Baseball","Tennis","Football","Badminton"];
+        //console.log(items);
+        for (var i = 0; i < items.length; i++) {
+        	if(items[i] == arr) {
+        		//console.log(items[i]);
+            $survey.setOptionSelected("Q2", i+1);
+        	}
+        }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/get-selected-options.html
+
+Description:
+This function will help you to get the answer options selected for a question by the respondents and use it within your script.
+Syntax
+$survey.getSelectedOptions("Question Code")
+Example Script
+We can capture the options that are selected in the source questions(Q1) and by default select the same answer options under the follow up question.
+arrow_right
+Script
+var arr = $survey.getSelectedOptions("Q1");
+        var items = ["Soccer","Cricket","Basketball","Hockey","Baseball","Tennis","Football","Badminton"];
+        console.log(items);
+        for (var i = 0; i < items.length; i++) {
+        	if(!!~jQuery.inArray(items[i], arr)) {
+        		//console.log(items[i]);
+            	$survey.setOptionSelected("Q2", i+1);
+        	}
+        }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/get-selected-option-index.html
+
+Description:
+This function will help you to get the index of the answer option selected for a question by the respondents and use it within your script.
+Syntax
+$survey.getSelectedOptionIndex("Question Code")
+Example Script
+We can capture the option by index that is selected in the source questions(Q1) and by default select the same answer options under the follow up question.
+arrow_right
+Script
+var _index = $survey.getSelectedOptionIndex("Q1");
+        $survey.setOptionSelected("Q2",_index);
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/get-selected-options-index.html
+
+Description: 
+This function will help you to get the indexes of the answer options selected for a question by the respondents and use it within your script.
+Syntax
+$survey.getSelectedOptionsIndex("Question Code")
+Example Script
+We can capture the options that are selected in the source questions(Q1) and by default select the same answer options under the follow up question.
+arrow_right
+Script
+var arr = $survey.getSelectedOptions("Q1");
+        var items = ["Soccer","Cricket","Basketball","Hockey","Baseball","Tennis","Football","Badminton"];
+        console.log(items);
+        for (var i = 0; i < items.length; i++) {
+        	if(!!~jQuery.inArray(items[i], arr)) {
+        		//console.log(items[i]);
+            	$survey.setOptionSelected("Q2", i+1);
+        	}
+        }
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/get-selected-count.html
+
+Description:
+This function will help you to get the total number of answer options selected for a question by the respondent and use it within your script.
+Syntax
+$survey.$survey.getSelectedCount("Question Code")
+Example Script
+Consider a multiple-select choice question, the number of options selected on the question can be stored as a count under a custom variable. We can fetch the value of the count by calling out the custom variable in the survey.
+arrow_right
+Script
+/* get number of options selected in Q1 */
+        var count = $survey.getSelectedCount("Q1");
+         
+        $survey.updateCustomVariable(1, count);
+
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/update-custom-variable.html
+QuestionPro JavaScript- updateCustomVariable
+
+Description:
+This function will help you to update the custom variables for the respondents while they are answering the survey.
+Syntax
+$survey.updateCustomVariable("Custom Variable Index", "Value")
+Example Script
+Consider a multiple-select choice question, the number of options selected on the question can be stored as a count under a custom variable. We can fetch the value of the count by calling out the custom variable in the survey.
+arrow_right
+Script
+/* get number of options selected in Q1 */
+        var count = $survey.getSelectedCount("Q1");
+         
+        $survey.updateCustomVariable(1, count);
+        document.forms['run'].onsubmit();
+Example Survey:
+Survey Link
+Need help?
+Contact Us
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/branch-to.html
+QuestionPro JavaScript- branchTo
+
+Description
+This function will help you to modify the flow of the survey for the respondent by apply branching logic via script.
+Note:
+This function only works in Post JavaScript logic.
+Syntax
+$survey.branchTo("Question Code")
+Example Script
+We can apply individual scores to the answer options of a question. Based on the score we can then branch the answer option to a particular followup question.
+arrow_right
+Script
+/* get score */
+          var _score = parseInt($survey.surveyResponseJson.score);
+             
+         if (_score == 1) {
+          branchTo(Q2);
+         } else if (_score == 2) {
+          branchTo(Q3);
+         } else if (_score == 3) {
+          branchTo(Q4);
+         } else if (_score == 4) {
+          branchTo(Q5);
+         }
+
+
+--- End of Content ---
+
+URL: https://www.questionpro.com/custom-scripting/javascript/example-scripts.html
+QuestionPro JavaScript- Example Scripts
+
+Example 1
+Based on the answer options selected in the source(Q1) question, the particular column will be shown in Q2.
+arrow_right
+Script
+var Question = "Q2";// replace this with the question code
+        var q1Count = 0;
+        var answered = 0;
+        var error_msg = "Please select an option for each columns";
+        var source_question = âQ1â;// replace this with source question code
+
+        /* header */
+        $("." + Question +" .matrix-multipoint-question .parent-table thead tr").not('.anchor').each(function(){
+                $(this).find("td").each(function(e){
+                $(this).addClass("column_"+e);
+                });
+              });
+
+        /* body */
+        $("." + Question +" .matrix-multipoint-question .parent-table tbody tr").not('.error-tr').each(function(){
+                $(this).find("td").each(function(e){
+                $(this).addClass("column_"+e);
+                });
+              });
+
+        /* source question */
+        var autot = $survey.getSelectedOptionsIndex(source_question);
+
+        for(var i=0; i < autot.length; i++){
+                $("." + Question +" .matrix-multipoint-question .parent-table .column_0").addClass("show_column");
+                $("." + Question +" .matrix-multipoint-question .parent-table .column_"+autot[i]).addClass("show_column");
+               
+              }
+
+        $("." + Question +" .matrix-multipoint-question .parent-table thead tr").not('.anchor').each(function(){
+                $(this).find("td").not(".show_column").each(function(e){
+                $(this).remove();
+                });
+              });
+
+        $("." + Question +" .matrix-multipoint-question .parent-table tbody tr").not('.error-tr').each(function(){
+                $(this).find("td").not(".show_column").each(function(e){
+                $(this).remove();
+                });
+              });
+
+         }
+Example Survey:
+Survey Link
+Example 2
+Piping text from top 2 selected options of a Rank Order question. To be used in the Post JavaScript Logic
+arrow_right
+Script
+var qCode = "Q1";// question code
+        var top_ = 2; // pipe top 2 options
+        var update_cv = 1; // update custom variable 1 with piping text
+        var piping_txt = [];
+
+        $("." + qCode +" .rank-order-question .answer-options").each(function(){
+              var index_ = $(this).find("select.form-select").prop('selectedIndex');
+              if(index_ <= top_){
+              piping_txt.push($(this).find(".control-label").text());
+              }
+            });
+
+        $survey.updateCustomVariable(update_cv, piping_txt);
+
+
+        }
+
+
+--- End of Content ---
+
+
+

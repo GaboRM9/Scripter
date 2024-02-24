@@ -15,7 +15,7 @@ dotenv.config();
 
 // Initialize Express app
 const app = express();
-const port = process.env.PORT || 3000; // Use the port from environment variables or default to 3000
+const port = process.env.PORT || 3000; // load port from .env or default to 3000
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -43,11 +43,8 @@ app.post('/process-input', async (req, res) => {
         <context>{context}</context>
         You should answer the code question giving an example to the user, use concise responses dont invent stuff.
         The format of your response is:
-
-        Consice short explanation
-
+        Consice short explanation, no line breaks.
         <code>Code example</code>
-        
         Question: {input}`);
 
     //RAG    
