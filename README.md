@@ -43,9 +43,8 @@ Contributions are welcome! Whether it's bug fixes, feature additions, or improve
 
 ## License
 
-QuestionPro
-
-https://www.questionpro.com
+© 2024 QuestionPro Survey Software | +1 (800) 531 0228
+https://www.questionpro.com/
 
 ## Contact and Contributors
 
