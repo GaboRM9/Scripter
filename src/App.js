@@ -10,7 +10,7 @@ import { createRetrievalChain } from "langchain/chains/retrieval";
 import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
 import dotenv from 'dotenv';
 
-// Load env config
+// Load env config 
 dotenv.config();
 
 // Initialize Express app
