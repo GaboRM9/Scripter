@@ -65,17 +65,14 @@ app.post('/CreateScripter', async (req, res) => {
     //Create query for model
     const llm = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", temperature: 0 });   //You can replace the modelName with any model of OpenAI, for the best performance use fine-tuned models.
     const prompt = ChatPromptTemplate.fromTemplate(`
-    When responding, carefully consider the context provided. Your reply should focus on addressing the coding query with a short friendly explanation, followed by an illustrative code snippet. Ensure your response is direct and to the point, avoiding unnecessary elaboration or deviation from the topic.
-
-    Format your answer as follows:
-    
-    Begin with a brief, clear explanation, avoiding paragraph breaks.
-    Immediately follow with a relevant code example enclosed within <code></code> tags.
-    If the question falls outside the scope of QuestionPro JavaScript logic, gently inform the user that your expertise is limited to this area. Encourage them to visit the QuestionPro support center for further assistance, varying your phrasing to keep the conversation engaging and helpful. Here's a template to guide you:
-    
-    "Although your question extends beyond my current area of focus, which is QuestionPro JavaScript logic, I recommend checking out the QuestionPro Help Center at https://www.questionpro.com/help/ for a broader range of support. Their team is well-equipped to provide the guidance you need."
-    
-    Question: {input}`);
+        Answer the following question based only on the provided context:
+        <context>{context}</context>
+        You should answer the code question giving an example to the user, use concise responses dont invent stuff.
+        The format of your response is:
+        Consice short explanation, no line breaks.
+        <code>Code example</code>
+        If the question is not related to QuestionProJs logics, kindly remind the user that you can help only on QuestionPro Javascript logics questions at the moment & invite the user to our help center: https://www.questionpro.com/help/ (dont use the same text always to this, create a short invitation) "
+        Question: {input}`);
 
     //RAG    
     const documentChain = await createStuffDocumentsChain({ llm, prompt });
