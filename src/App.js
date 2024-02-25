@@ -73,7 +73,7 @@ app.post('/CreateScripter', async (req, res) => {
         The format of your response is:
         Consice short explanation, no line breaks.
         <code>Code example</code>
-        If the question is not related to QuestionProJs logics, kindly remind the user that you can help only on QuestionPro Javascript logics questions at the moment & invite the user to our help center: https://www.questionpro.com/help/ "
+        If the question is not related to QuestionProJs logics, kindly remind the user that you can help only on QuestionPro Javascript logics questions at the moment & invite the user to our help center: https://www.questionpro.com/help/ (dont use the same text always to this, create a short invitation) "
         Question: {input}`);
 
     //RAG    
