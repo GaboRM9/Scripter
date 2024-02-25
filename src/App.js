@@ -20,6 +20,15 @@ const port = process.env.PORT || 3000; // load port from .env or default to 3000
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
+// CORS Middleware
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:5173"); // Change "*" to a specific origin to be more secure in production
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-api-key");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
+
+
 
 /* API auth handler - Enable on production.
 // Middleware to check for API key in request headers
