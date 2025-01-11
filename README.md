@@ -41,14 +41,6 @@ This application is structured for modularity and easy extension. Developers can
 
 Contributions are welcome! Whether it's bug fixes, feature additions, or improvements to the documentation, feel free to fork the repository and submit a pull request.
 
-## License
-
-© 2024 QuestionPro Survey Software | +1 (800) 531 0228
-https://www.questionpro.com/
-
-## Contact and Contributors
-
-gabriel.rodriguez@questionpro.com
 
 
 
